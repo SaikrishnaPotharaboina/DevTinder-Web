@@ -14,6 +14,7 @@ function Login() {
 	const [password, setPassword] = useState("Saikrishna@31");
 	const dispatch = useDispatch();
 	const navigate = useNavigate("")
+	const [error, setError] = useState();
 
 
 
@@ -28,7 +29,9 @@ function Login() {
 			return navigate("/")
 
 		} catch (error) {
-			console.error(error)
+			console.log("Login error:", error.response?.data);
+
+			setError(error.response?.data || "Something went wrong");
 		};
 
 	}
@@ -39,7 +42,7 @@ function Login() {
 					<h2 className="card-title justify-center">Login</h2>
 					<div>
 						<fieldset className="fieldset">
-							<label className="label" htmlFor="name">Email:{email}</label>
+							<label className="label" htmlFor="name">Email</label>
 							<input type="email" id="name" className="input" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 						</fieldset>
 						<fieldset className="fieldset">
@@ -47,8 +50,9 @@ function Login() {
 							<input type="password" id="name" className="input" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 						</fieldset>
 					</div>
-					<div className="card-actions justify-end">
-						<button className="btn btn-primary" onClick={(e) => handleLogin(e.target)}>Login</button>
+					<p className="text-red-500">{error}</p>
+					<div className="card-actions  justify-center">
+						<button className="btn btn-primary " onClick={(e) => handleLogin(e.target)}>Login</button>
 					</div>
 				</div>
 			</div>
