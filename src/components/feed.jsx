@@ -24,6 +24,7 @@ function Feed() {
 
     useEffect(() => {
         getFeed();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
