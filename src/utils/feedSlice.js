@@ -5,9 +5,9 @@ const FeedSlice = createSlice({
     name: "feed",
     initialState: null,
     reducers: {
-        addFeed: (state, action) => { return action.payload },
+        addFeed: (state, action) => action.payload,
         // eslint-disable-next-line no-unused-vars
-        removeFeed: (state, action) => { return null }
+        removeFeed: (state, action) => null
     },
 })
 
