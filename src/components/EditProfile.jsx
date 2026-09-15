@@ -52,61 +52,152 @@ function EditProfile({ user }) {
             setError(error.response?.data?.message || "Something went wrong");
         }
     };
+
+
     return (
+        <div className="min-h-screen bg-base-200 py-12 px-4">
 
+            <div className="flex flex-col lg:flex-row items-start justify-center gap-8 max-w-5xl mx-auto">
 
-        <div className="flex justify-center my-10">
-            <div className="flex justify-center mx-10">
-                <div className="card card-border bg-base-300 w-96">
+                {/* Edit Profile */}
+                <div className="card bg-base-100 w-full max-w-md shadow-lg border border-base-300">
                     <div className="card-body">
-                        <h2 className="card-title justify-center">Edit Profile</h2>
-                        <div>
+
+                        <h2 className="text-2xl font-semibold text-center mb-6">
+                            Edit Profile
+                        </h2>
+
+                        <div className="space-y-4">
+
                             <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">First Name:</label>
-                                <input type="email" id="name" className="input" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">Last Name:</label>
-                                <input type="" id="name" className="input" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">Age:</label>
-                                <input type="" id="name" className="input" value={age} onChange={(e) => setAge(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">gender:</label>
-                                <input type="" id="name" className="input" value={gender} onChange={(e) => setGender(e.target.value)} />
+                                <label className="label text-sm font-medium">
+                                    First Name
+                                </label>
+                                <input
+                                    type="email"
+                                    id="name"
+                                    className="input input-bordered w-full"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
                             </fieldset>
 
                             <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">PhotoUrl:</label>
-                                <input type="" id="name" className="input" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
+                                <label className="label text-sm font-medium">
+                                    Last Name
+                                </label>
+                                <input
+                                    type=""
+                                    id="name"
+                                    className="input input-bordered w-full"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </fieldset>
+
+                            <div className="grid grid-cols-2 gap-4">
+
+                                <fieldset className="fieldset">
+                                    <label className="label text-sm font-medium">
+                                        Age
+                                    </label>
+                                    <input
+                                        type=""
+                                        id="name"
+                                        className="input input-bordered w-full"
+                                        value={age}
+                                        onChange={(e) => setAge(e.target.value)}
+                                    />
+                                </fieldset>
+
+                                <fieldset className="fieldset">
+                                    <label className="label text-sm font-medium">
+                                        Gender
+                                    </label>
+                                    <input
+                                        type=""
+                                        id="name"
+                                        className="input input-bordered w-full"
+                                        value={gender}
+                                        onChange={(e) => setGender(e.target.value)}
+                                    />
+                                </fieldset>
+
+                            </div>
+
+                            <fieldset className="fieldset">
+                                <label className="label text-sm font-medium">
+                                    Photo URL
+                                </label>
+                                <input
+                                    type=""
+                                    id="name"
+                                    className="input input-bordered w-full"
+                                    value={photoUrl}
+                                    onChange={(e) => setPhotoUrl(e.target.value)}
+                                />
                             </fieldset>
 
                             <fieldset className="fieldset">
-                                <label className="label" htmlFor="name">About:</label>
-                                <input type="" id="name" className="input" value={about} onChange={(e) => setAbout(e.target.value)} />
+                                <label className="label text-sm font-medium">
+                                    About
+                                </label>
+                                <textarea
+                                    className="textarea textarea-bordered w-full h-24 resize-none"
+                                    value={about}
+                                    onChange={(e) => setAbout(e.target.value)}
+                                />
                             </fieldset>
 
                         </div>
-                        <p className="text-red-500">{error}</p>
-                        <div className="card-actions  justify-center">
-                            <button className="btn btn-primary " onClick={saveProfile}>Save Profile</button>
-                        </div>
+
+                        <p className="text-error text-sm text-center mt-3">
+                            {error}
+                        </p>
+
+                        <button
+                            className="btn btn-primary w-full mt-4"
+                            onClick={saveProfile}
+                        >
+                            Save Profile
+                        </button>
+
                     </div>
                 </div>
+
+                {/* Profile Preview */}
+                <div className="w-full max-w-sm">
+
+                    <p className="text-center text-sm font-medium text-base-content/60 mb-3">
+                        Profile Preview
+                    </p>
+
+                    <UserCard
+                        user={{
+                            firstName,
+                            lastName,
+                            age,
+                            gender,
+                            photoUrl,
+                            about
+                        }}
+                    />
+
+                </div>
+
             </div>
-            <UserCard user={{ firstName, lastName, age, gender, photoUrl, about }} />
-            {showTost &&
+
+            {/* Toast */}
+            {showTost && (
                 <div className="toast toast-top toast-center">
-                    <div className="alert alert-info">
+                    <div className="alert alert-success shadow-lg">
                         <span>Profile was Saved successfully!</span>
                     </div>
                 </div>
-            }
+            )}
 
         </div>
-    )
-}
+    );
+};
 
 export default EditProfile
