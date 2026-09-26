@@ -21,7 +21,27 @@ export const Connections = () => {
 
     if (!connections) return null;
 
-    if (connections.length === 0) return <h1>No Connections Found</h1>
+    if (connections.length === 0) {
+        return (
+            <div className="min-h-screen bg-base-200 flex items-center justify-center px-4">
+                <div className="text-center">
+
+                    <div className="text-6xl mb-4">
+                        👥
+                    </div>
+
+                    <h1 className="text-2xl font-bold text-base-content mb-2">
+                        No Requests
+                    </h1>
+
+                    <p className="text-base-content/60">
+                        You don't have any connection requests yet.
+                    </p>
+
+                </div>
+            </div>
+        );
+    }
 
 
     return (
@@ -60,7 +80,7 @@ export const Connections = () => {
                                 </h2>
 
                                 <p className="text-sm text-base-content/70">
-                                    {age} years • {gender}
+                                    {age && gender && <span>{age + ", " + gender}</span>}
                                 </p>
 
                                 <p className="text-sm mt-2 line-clamp-3">
