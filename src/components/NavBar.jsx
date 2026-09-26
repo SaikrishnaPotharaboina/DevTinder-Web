@@ -49,6 +49,7 @@ export function NavBar() {
                             </Link>
                         </li>
                         <li><Link to="/Connections">Connections</Link></li>
+                        <li><Link to="/Requests">Requests</Link></li>
                         <li><a onClick={handleLogOut}>Logout</a></li>
                     </ul>
                 </div>
