@@ -1,9 +1,42 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeFeed } from "../utils/feedSlice";
+
 function UserCard({ user }) {
+    const dispatch = useDispatch();
     if (!user) {
         return <div>Loading...</div>;
     }
 
-    const { firstName, lastName, age, gender, photoUrl, about } = user;
+    const handleRequestSending = async (status, userId) => {
+        try {
+            const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId, {}, { withCredentials: true })
+            dispatch(removeFeed(userId));
+            console.log("Request sent:", res.data);
+
+        } catch (error) {
+            console.log(
+                "Interested request failed:",
+                error.response?.data || error.message
+            );
+        }
+    }
+
+    // const handleIgnore = () => {
+    //     dispatch(ignore());
+
+    //     RequestSending("ignored", _id);
+    // };
+
+    // const handleInterested = () => {
+    //     dispatch(interested(user));
+
+    //     RequestSending("interested", _id);
+    // };
+
+
+    const { _id, firstName, lastName, age, gender, photoUrl, about } = user;
 
     return (
         <div className="my-15 flex justify-center items-center">
@@ -27,17 +60,17 @@ function UserCard({ user }) {
                     <p>{about}</p>
 
                     <div className="card-actions justify-center">
-                        <button className="btn btn-primary">
+                        <button className="btn btn-primary" onClick={() => { handleRequestSending("ignored", _id) }} >
                             Ignore
                         </button>
 
-                        <button className="btn btn-secondary">
+                        <button className="btn btn-secondary" onClick={() => { handleRequestSending("interested", _id) }} >
                             Interested
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
