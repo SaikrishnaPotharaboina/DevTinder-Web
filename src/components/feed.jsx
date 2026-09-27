@@ -27,7 +27,15 @@ function Feed() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
+    if (!feed || feed.length === 0) {
+        return (
+            <div className="flex justify-center mt-20">
+                <h1 className="text-2xl font-bold">
+                    No more profiles
+                </h1>
+            </div>
+        );
+    }
     return (
         feed && (
             <div className="flex justify-center my-10">
