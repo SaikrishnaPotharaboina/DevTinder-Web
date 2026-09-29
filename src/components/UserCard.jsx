@@ -11,9 +11,9 @@ function UserCard({ user }) {
 
     const handleRequestSending = async (status, userId) => {
         try {
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId, {}, { withCredentials: true })
             dispatch(removeFeed(userId));
-            console.log("Request sent:", res.data);
 
         } catch (error) {
             console.log(
