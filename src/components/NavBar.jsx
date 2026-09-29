@@ -50,7 +50,7 @@ export function NavBar() {
                         </li>
                         <li><Link to="/Connections">Connections</Link></li>
                         <li><Link to="/Requests">Requests</Link></li>
-                        <li><a onClick={handleLogOut}>Logout</a></li>
+                        <li><Link to="/Login" onClick={handleLogOut} >Logout</Link></li>
                     </ul>
                 </div>
             </div>}
