@@ -46,12 +46,39 @@ export const Connections = () => {
 
     return (
         <div className="min-h-screen bg-base-200 px-4 py-10">
-            <h1 className="text-3xl font-bold text-center mb-8">
-                My Connections
-            </h1>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            {/* Page Header */}
+            <div className="max-w-7xl mx-auto text-center mb-10">
+
+                <p className="text-sm font-semibold text-primary uppercase tracking-[0.2em]">
+                    Your Network
+                </p>
+
+                <h1 className="text-4xl md:text-5xl font-extrabold mt-2">
+                    My Connections
+                </h1>
+
+                <p className="text-base-content/60 mt-3">
+                    People you're connected with
+                </p>
+
+            </div>
+
+
+            {/* Connections Grid */}
+            <div className="
+            max-w-7xl
+            mx-auto
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            xl:grid-cols-4
+            gap-6
+        ">
+
                 {connections.map((connection) => {
+
                     const {
                         firstName,
                         lastName,
@@ -62,35 +89,200 @@ export const Connections = () => {
                     } = connection;
 
                     return (
+
                         <div
                             key={connection._id}
-                            className="card bg-base-100 w-80 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                            className="
+                            group
+                            relative
+                            overflow-hidden
+                            rounded-3xl
+                            bg-base-100
+                            border
+                            border-base-300
+                            shadow-sm
+                            hover:shadow-2xl
+                            hover:-translate-y-2
+                            transition-all
+                            duration-300
+                        "
                         >
-                            <figure className="px-4 pt-4">
-                                <img
-                                    src={photoUrl}
-                                    alt={`${firstName} ${lastName}`}
-                                    className="h-64 w-full object-cover rounded-xl"
-                                />
-                            </figure>
 
-                            <div className="card-body">
-                                <h2 className="card-title text-xl">
-                                    {firstName} {lastName}
-                                </h2>
+                            {/* Gradient Header */}
+                            <div className="
+                            h-24
+                            bg-gradient-to-r
+                            from-primary
+                            via-secondary
+                            to-accent
+                            relative
+                        ">
 
-                                <p className="text-sm text-base-content/70">
-                                    {age && gender && <span>{age + ", " + gender}</span>}
-                                </p>
+                                {/* Connected Badge */}
+                                <div className="
+                                absolute
+                                top-4
+                                right-4
+                                flex
+                                items-center
+                                gap-2
+                                bg-base-100/90
+                                backdrop-blur-md
+                                px-3
+                                py-1.5
+                                rounded-full
+                                text-xs
+                                font-semibold
+                                shadow
+                            ">
 
-                                <p className="text-sm mt-2 line-clamp-3">
-                                    {about}
-                                </p>
+                                    <span className="
+                                    w-2
+                                    h-2
+                                    rounded-full
+                                    bg-success
+                                "></span>
+
+                                    Connected
+
+                                </div>
+
                             </div>
+
+
+                            {/* Profile Image */}
+                            <div className="
+                            relative
+                            flex
+                            justify-center
+                        ">
+
+                                <div className="
+                                absolute
+                                -top-14
+                                w-28
+                                h-28
+                                rounded-full
+                                bg-base-100
+                                p-1.5
+                                shadow-xl
+                            ">
+
+                                    <img
+                                        src={photoUrl}
+                                        alt={`${firstName} ${lastName}`}
+                                        className="
+                                        w-full
+                                        h-full
+                                        rounded-full
+                                        object-cover
+                                        group-hover:scale-105
+                                        transition-transform
+                                        duration-300
+                                    "
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* Card Content */}
+                            <div className="pt-18 px-6 pb-6">
+
+                                {/* Name */}
+                                <div className="text-center">
+
+                                    <h2 className="
+                                    text-xl
+                                    font-bold
+                                    truncate
+                                    group-hover:text-primary
+                                    transition-colors
+                                ">
+                                        {firstName} {lastName}
+                                    </h2>
+
+                                    {/* Age / Gender */}
+                                    {(age || gender) && (
+                                        <p className="
+                                        text-sm
+                                        text-base-content/60
+                                        mt-1
+                                    ">
+                                            {age && `${age} years`}
+                                            {age && gender && " • "}
+                                            {gender}
+                                        </p>
+                                    )}
+
+                                </div>
+
+
+                                {/* About */}
+                                <div className="
+                                mt-5
+                                rounded-2xl
+                                bg-base-200
+                                p-4
+                                min-h-24
+                                flex
+                                items-center
+                                justify-center
+                            ">
+
+                                    <p className="
+                                    text-sm
+                                    text-base-content/70
+                                    text-center
+                                    leading-relaxed
+                                    line-clamp-3
+                                ">
+                                        {about || "No bio available"}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
                         </div>
+
                     );
                 })}
+
             </div>
+
+
+            {/* Empty State */}
+            {connections.length === 0 && (
+                <div className="
+                max-w-md
+                mx-auto
+                text-center
+                mt-20
+                bg-base-100
+                rounded-3xl
+                p-10
+                shadow-lg
+                border
+                border-base-300
+            ">
+
+                    <div className="text-5xl mb-4">
+                        🤝
+                    </div>
+
+                    <h2 className="text-2xl font-bold">
+                        No Connections Yet
+                    </h2>
+
+                    <p className="text-base-content/60 mt-2">
+                        Start connecting with developers to build your network.
+                    </p>
+
+                </div>
+            )}
+
         </div>
     );
 
