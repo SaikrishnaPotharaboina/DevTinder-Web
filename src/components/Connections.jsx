@@ -31,7 +31,7 @@ export const Connections = () => {
                     </div>
 
                     <h1 className="text-2xl font-bold text-base-content mb-2">
-                        No Requests
+                        No Connections
                     </h1>
 
                     <p className="text-base-content/60">
