@@ -58,11 +58,24 @@ function Requests() {
     return (
         <div className="min-h-screen bg-base-200 px-4 py-10">
 
-            <h1 className="text-3xl font-bold text-center mb-8">
-                My Requests
-            </h1>
+            {/* Header */}
+            <div className="max-w-6xl mx-auto mb-10 text-center">
+                <p className="text-sm font-semibold text-primary uppercase tracking-widest">
+                    Connections
+                </p>
 
-            <div className="flex flex-wrap justify-center gap-6">
+                <h1 className="text-4xl md:text-5xl font-extrabold mt-2">
+                    My Requests
+                </h1>
+
+                <p className="text-base-content/60 mt-3">
+                    People who are interested in connecting with you
+                </p>
+            </div>
+
+
+            {/* Request Cards */}
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 {request.map((requests) => {
 
@@ -78,39 +91,156 @@ function Requests() {
                     return (
                         <div
                             key={requests._id}
-                            className="card w-96 bg-base-100 shadow-xl"
+                            className="
+                            group
+                            bg-base-100
+                            rounded-3xl
+                            border border-base-300
+                            shadow-sm
+                            hover:shadow-2xl
+                            hover:-translate-y-1
+                            transition-all
+                            duration-300
+                            overflow-hidden
+                        "
                         >
 
-                            <figure className="px-6 pt-6">
-                                <img
-                                    src={photoUrl}
-                                    alt={`${firstName} ${lastName}`}
-                                    className="w-24 h-24 rounded-full object-cover"
-                                />
-                            </figure>
+                            {/* Top Gradient */}
+                            <div className="h-24 bg-gradient-to-r from-primary/80 via-secondary/70 to-accent/70 relative">
 
-                            <div className="card-body">
+                                {/* Online dot */}
+                                <div className="
+                                absolute
+                                top-4
+                                right-4
+                                flex
+                                items-center
+                                gap-2
+                                bg-base-100/90
+                                backdrop-blur
+                                px-3
+                                py-1
+                                rounded-full
+                                text-xs
+                                font-medium
+                            ">
+                                    <span className="w-2 h-2 rounded-full bg-success"></span>
+                                    Interested
+                                </div>
 
-                                <h2 className="card-title">
-                                    {firstName} {lastName}
-                                </h2>
+                            </div>
 
-                                <p>
-                                    {age} {gender && `• ${gender}`}
-                                </p>
 
-                                <p className="text-base-content/70">
-                                    {about}
-                                </p>
+                            {/* Profile Image */}
+                            <div className="relative flex justify-center">
 
-                                <div className="card-actions justify-end mt-4">
+                                <div className="
+                                absolute
+                                -top-14
+                                w-28
+                                h-28
+                                rounded-full
+                                p-1
+                                bg-base-100
+                                shadow-xl
+                            ">
+                                    <img
+                                        src={photoUrl}
+                                        alt={`${firstName} ${lastName}`}
+                                        className="
+                                        w-full
+                                        h-full
+                                        rounded-full
+                                        object-cover
+                                    "
+                                    />
+                                </div>
 
-                                    <button className="btn btn-success" onClick={() => reviewRequest("accepted", requests._id)}>
-                                        Accept
+                            </div>
+
+
+                            {/* Content */}
+                            <div className="pt-18 px-6 pb-6">
+
+                                {/* Name */}
+                                <div className="text-center">
+
+                                    <h2 className="
+                                    text-2xl
+                                    font-bold
+                                    group-hover:text-primary
+                                    transition-colors
+                                ">
+                                        {firstName} {lastName}
+                                    </h2>
+
+                                    {/* Age / Gender */}
+                                    <p className="text-sm text-base-content/60 mt-1">
+                                        {age && `${age} years`}
+                                        {age && gender && " • "}
+                                        {gender}
+                                    </p>
+
+                                </div>
+
+
+                                {/* About */}
+                                <div className="
+                                mt-5
+                                bg-base-200
+                                rounded-2xl
+                                p-4
+                                min-h-20
+                            ">
+
+                                    <p className="text-sm text-base-content/70 leading-relaxed text-center">
+                                        {about || "No bio available"}
+                                    </p>
+
+                                </div>
+
+
+                                {/* Buttons */}
+                                <div className="grid grid-cols-2 gap-3 mt-6">
+
+                                    <button
+                                        onClick={() =>
+                                            reviewRequest(
+                                                "accepted",
+                                                requests._id
+                                            )
+                                        }
+                                        className="
+                                        btn
+                                        btn-success
+                                        rounded-xl
+                                        text-white
+                                        shadow-md
+                                        hover:scale-[1.02]
+                                        transition
+                                    "
+                                    >
+                                        ✓ Accept
                                     </button>
 
-                                    <button className="btn btn-error" onClick={() => reviewRequest("rejected", requests._id)}>
-                                        Reject
+                                    <button
+                                        onClick={() =>
+                                            reviewRequest(
+                                                "rejected",
+                                                requests._id
+                                            )
+                                        }
+                                        className="
+                                        btn
+                                        btn-error
+                                        rounded-xl
+                                        text-white
+                                        shadow-md
+                                        hover:scale-[1.02]
+                                        transition
+                                    "
+                                    >
+                                        ✕ Reject
                                     </button>
 
                                 </div>
@@ -122,6 +252,7 @@ function Requests() {
                 })}
 
             </div>
+
         </div>
     );
 }
