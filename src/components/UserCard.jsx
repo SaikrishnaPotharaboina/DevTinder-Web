@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeFeed } from "../utils/feedSlice";
 
-function UserCard({ user }) {
+function UserCard({ user, showAction = true }) {
     const dispatch = useDispatch();
     if (!user) {
         return <div>Loading...</div>;
@@ -59,15 +59,17 @@ function UserCard({ user }) {
 
                     <p>{about}</p>
 
-                    <div className="card-actions justify-center">
-                        <button className="btn btn-primary" onClick={() => { handleRequestSending("ignored", _id) }} >
-                            Ignore
-                        </button>
+                    {showAction &&
+                        <div className="card-actions justify-center">
+                            <button className="btn btn-primary" onClick={() => { handleRequestSending("ignored", _id) }} >
+                                Ignore
+                            </button>
 
-                        <button className="btn btn-secondary" onClick={() => { handleRequestSending("interested", _id) }} >
-                            Interested
-                        </button>
-                    </div>
+                            <button className="btn btn-secondary" onClick={() => { handleRequestSending("interested", _id) }} >
+                                Interested
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </div >
