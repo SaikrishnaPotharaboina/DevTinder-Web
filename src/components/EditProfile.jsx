@@ -181,6 +181,7 @@ function EditProfile({ user }) {
                             photoUrl,
                             about
                         }}
+                        showAction={false}
                     />
 
                 </div>
